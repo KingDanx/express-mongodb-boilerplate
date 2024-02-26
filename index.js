@@ -12,16 +12,17 @@ const logger = new LiteLogger(__dirname);
 //? Secrets
 const env = require("dotenv");
 env.config({ path: `${__dirname}/config/.config` });
+//? Global variables
+global.__dirname = __dirname;
+global.env = process.env;
+global.logger = logger;
 
 const port = process.env.REST_PORT || 5000;
 
 const app = express();
 app.use(cors());
-app.use((req, res, next) => {
-  //? Passing to routes.
-  req.logger = logger;
-  next();
-});
+app.use(express.json());
+
 app.use("/tests", tests); //? Init route.
 
 //? Serves files or an HTML document in the specified directory
