@@ -33,7 +33,7 @@ app.listen(port, () => {
 });
 
 async function init() {
-  init_db_listeners(logger);
+  init_db_listeners();
   await get_database();
 }
 
